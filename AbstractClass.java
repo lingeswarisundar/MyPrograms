@@ -29,7 +29,7 @@ class Circle extends Shape {
         area = a[0]*a[0]*3.14F;
     }
     void printArea() {
-        System.out.println("Area of the Circle :"+area);
+        System.out.println("Area of the Circle is :"+area);
     }
 }
 
