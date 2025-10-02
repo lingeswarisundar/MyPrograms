@@ -32,7 +32,7 @@ class StackImplementation {
    
     void display() {
         System.out.println("Stack is ");
-        for (int i = top;i<=0;i--) {
+        for (int i = top;i>=0;i--) {
             System.out.println(stack[i]+" ");
         }
     }
