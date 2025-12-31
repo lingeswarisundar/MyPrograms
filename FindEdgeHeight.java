@@ -26,11 +26,9 @@ class FindEdgeHeight {
     }
     static public int height(BinaryTree root) {
         if (root == null) {
-            return -1;  // or 0 depending on definition
+            return -1;  
         }
-        int leftHeight = height(root.left);
-        int rightHeight = height(root.right);
-        return 1 + Math.max(leftHeight, rightHeight);
+        return 1 + Math.max(height(root.left), height(root.right));
     }
     public static void main(String[] args) {
         BinaryTree ro = null;
