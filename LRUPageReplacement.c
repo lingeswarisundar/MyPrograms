@@ -13,6 +13,7 @@ int main() {
     printf("Enter the frame size : ");
     scanf("%d",&fs);
     int frame[fs];
+    int time[fs];
     for(i=0;i<fs;i++) {
         frame[i] = -1;
     }
@@ -21,22 +22,31 @@ int main() {
     printf("LRU Page Replacement\n");
     for(i=0;i<rs;i++) {
         int found = 0;
-        if(start == fs) {
-            start = 0;
-        }
         for(j=0;j<fs;j++) {
             if(ref[i]==frame[j]) {
+                time[j] = i;
                 found = 1;
-                if(frame[start]==frame[j]) {
-                    start++;
-                }
                 break;
             }
         }
         if(found==0) {
-            frame[start] = ref[i];
+            if(start < fs) {
+                frame[start] = ref[i];
+                time[start] = i;
+                start++;
+            } else {
+                int small = time[0];
+                int index = 0;
+                for(j =1;j<fs;j++) {
+                    if(small>time[j]) {
+                        small = time[j];
+                        index = j;
+                    }
+                }
+                frame[index] = ref[i];
+                time[index] = i;
+            }
             fault++;
-            start++;
             for(j=0;j<fs;j++) {
                 if(frame[j]==-1) {
                     printf("- ");
@@ -45,7 +55,7 @@ int main() {
                 printf("%d ",frame[j]);
             }
             printf("\n");
-        }  
-    }
+        }
+    }  
     printf("Page Fault : %d",fault);
 }
